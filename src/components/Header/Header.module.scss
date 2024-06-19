@@ -1,0 +1,44 @@
+.container {
+  min-width: 100%;
+    padding-left: 13px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  border-bottom: 1px solid #555;
+}
+
+.button {
+  height: 12px;
+  color: #bbb;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    color: #ebebeb;
+    transition: color ease-in 0.2s;
+  }
+}
+
+.icon {
+  width: 12px;
+  height: 12px;
+}
+
+.list {
+    display: flex;
+    gap: 20px;
+    list-style-type: none;
+
+    &-item {
+        font-size: 11px;
+        line-height: 28px;
+        color: #bbb;
+        cursor: pointer;
+
+        &--active {
+            color: #ebebeb;
+            border-bottom: 2px solid #ebebeb;
+        }
+    }
+}
