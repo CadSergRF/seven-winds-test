@@ -1,0 +1,51 @@
+.container {
+  width: 100%;
+  border-right: 1px solid #555;
+}
+
+.header {
+  height: 35px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #555;
+}
+
+.header-text {
+  font-size: 11px;
+  line-height: 11px;
+  color: #bbb;
+
+  &--sub {
+    font-size: 8px;
+    font-style: italic;
+    color: #bbb;
+  }
+}
+
+.icon {
+  width: 12px;
+  height: 12px;
+}
+
+.list-item {
+    width: 100%;
+    padding: 5px 10px;
+    border: none;
+    display: flex;
+    gap: 10px;
+    background-color: transparent;
+    cursor: pointer;
+
+    &-text {
+        font-size: 11px;
+        line-height: 11px;
+        color: #ebebeb;
+    }
+
+    &-active {
+        color: #fff;
+        background-color: #bbb;
+    }
+}

@@ -1,0 +1,32 @@
+.wrapper {
+    width: 100%;
+}
+
+.header {
+    height: 35px;
+    padding-left: 8px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #555;
+
+    &-text {
+        font-size: 13px;
+        line-height: 18px;
+        color: #bbb;
+        border-right: 1px solid #555;
+    }
+}
+
+.container {
+    padding: 6px 0 6px 13px;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 75px auto repeat(4, 140px);
+    border-bottom: 1px solid #555;
+
+    &-item {
+        font-size: 11px;
+        line-height: 14px;
+        color: #bbb;
+    }
+}

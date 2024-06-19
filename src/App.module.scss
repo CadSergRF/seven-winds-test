@@ -3,5 +3,7 @@
 }
 
 .wrapper {
-  display: flex;
+  min-height: calc(100vh - 31px);
+  display: grid;
+  grid-template-columns: 170px auto;
 }
