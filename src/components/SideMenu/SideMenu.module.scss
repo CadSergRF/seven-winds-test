@@ -24,6 +24,19 @@
   }
 }
 
+.button {
+  height: 12px;
+  color: #bbb;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    color: #ebebeb;
+    transition: color ease-in 0.2s;
+  }
+}
+
 .icon {
   width: 12px;
   height: 12px;
