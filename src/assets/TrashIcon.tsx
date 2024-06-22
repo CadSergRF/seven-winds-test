@@ -1,7 +1,12 @@
-export const TrashIcon: React.FC = () => (
+type TProps = {
+  onClick: () => void
+}
+
+export const TrashIcon = ({onClick}: TProps) => (
   <svg
-    width="100%"
-    height="100%"
+    width="12px"
+    height="12px"
+    onClick={onClick}
     viewBox="0 0 14 15"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"

@@ -8,11 +8,11 @@ export type TRow = {
     mimExploitation: number,
     overheads: number,
     parentId?: number,
-    rowName: number,
+    rowName: string,
     salary: number,
     supportCosts: number,
     total?: number,
-    child?: TRow
+    child?: TRow[]
 };
 
 export type TRowCreate = Omit<TRow, 'id' | 'total' | 'child'>;

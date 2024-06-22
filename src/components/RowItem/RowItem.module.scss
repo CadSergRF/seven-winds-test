@@ -1,0 +1,52 @@
+.container {
+  padding: 6px 0 6px 13px;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 75px auto repeat(4, 140px);
+  border-bottom: 1px solid #555;
+}
+
+.level {
+    width: max-content;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+
+    &-hover {
+      padding: 5px;
+      background-color: #555;
+      border-radius: 5px;
+    }
+}
+
+.input {
+  font-size: 11px;
+  padding-right: 20px;
+
+  &_name {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #bbb;
+
+    &:focus {
+      border: 1px solid #555;
+      background-color: transparent;
+      color: #bbb;
+    }
+
+    &:active {
+      border: 1px solid #555;
+      background-color: transparent;
+      color: #bbb;
+    }
+
+    &:disabled {
+      border: none;
+      color: #fff;
+    }
+  }
+}

@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import { instantsApi } from './api/instants.api';
+import rowsViewReducer from './rows.slice';
 
 const rootReducer = combineReducers({
+  rowsView: rowsViewReducer,
   [instantsApi.reducerPath]: instantsApi.reducer,
 });
 
