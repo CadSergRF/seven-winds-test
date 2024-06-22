@@ -7,7 +7,7 @@ export type TRow = {
     materials: number,
     mimExploitation: number,
     overheads: number,
-    parentId?: number,
+    parentId?: number | null,
     rowName: string,
     salary: number,
     supportCosts: number,
@@ -15,7 +15,12 @@ export type TRow = {
     child?: TRow[]
 };
 
-export type TRowCreate = Omit<TRow, 'id' | 'total' | 'child'>;
+export type TRowCreate = Omit<TRow, 'total' | 'child'>;
+
+export type TNewChildRow = {
+    parentId: number | null,
+    newRow: TRow
+}
 
 export type TCreateRowResponse = {
     current: TRow,

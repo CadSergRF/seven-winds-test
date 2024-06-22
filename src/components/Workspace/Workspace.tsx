@@ -1,5 +1,4 @@
 import { useAppSelector } from "../../hooks/redux.hooks";
-
 import RowsAll from "../RowsAll/RowsAll";
 
 import { workSpaceMenu } from "./Workspace.data";
@@ -8,7 +7,7 @@ import styles from "./Workspace.module.scss";
 export default function Workspace() {
 
   const rowsState = useAppSelector((state) => state.rowsView);
-
+console.log(rowsState.rows)
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
@@ -22,7 +21,7 @@ export default function Workspace() {
         ))}
       </div>
       {rowsState.isError && <div>{rowsState.isError}</div>}
-      {!rowsState.isError && <RowsAll rows={rowsState.rows} level={0} />}
+      {!rowsState.isError && (rowsState.rows.length > 0) && <RowsAll rows={rowsState.rows} level={0} />}
     </div>
   );
 }

@@ -21,8 +21,9 @@ export const smrApi = instantsApi.injectEndpoints({
         url: `/${rID}/update`,
         method: 'POST',
       }),
+
     }),
-    deleteProduct: builder.mutation({
+    deleteRow: builder.mutation({
       query: (rId) => ({
         url: `${rId}/delete`,
         method: 'DELETE',

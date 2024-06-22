@@ -9,24 +9,30 @@ import { smrApi } from "../../store/api/smr.api";
 import { TrashIcon } from "../../assets/TrashIcon";
 import clsx from "clsx";
 import { newRow } from "./RowItem.constants";
+import { useAppDispatch } from "../../hooks/redux.hooks";
+import { rowsViewSlice } from "../../store/rows.slice";
 
 type TRowItemProps = {
   row: TRow;
   level: number;
+  edit: boolean;
 };
 
-export default function RowItem({ row, level }: TRowItemProps) {
+export default function RowItem({ row, level, edit }: TRowItemProps) {
   const { id } = row;
 
-  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [isEdit, setIsEdit] = useState<boolean>(edit);
   const [rowState, setRowState] = useState<TRow>(row);
   const [isLevelHover, setIsLevelHover] = useState<boolean>(false);
 
   const [updateRow] = smrApi.useUpdateRowMutation();
   const [createRow] = smrApi.useCreateRowInEntityMutation();
-  const [deleteRow] = smrApi.useDeleteProductMutation();
+  const [deleteRow] = smrApi.useDeleteRowMutation();
+
+  const dispatch = useAppDispatch();
 
   const handleSetIsEdit = () => {
+    console.log("click");
     setIsEdit(true);
   };
 
@@ -41,22 +47,40 @@ export default function RowItem({ row, level }: TRowItemProps) {
   const handleInputKeyPress = (evt: React.KeyboardEvent<HTMLElement>) => {
     if (evt.key === "Enter") {
       updateRow({ rID: id, updateData: rowState });
+      dispatch(rowsViewSlice.actions.updateRow(rowState));
       setIsEdit(false);
     }
   };
 
-  const handleCreateRow = () => {
+  const handleCreateRow = async () => {
     newRow.parentId = id;
-    createRow(newRow);
+    try {
+      const res = await createRow(newRow);
+      if (res.data?.current) {
+        dispatch(
+          rowsViewSlice.actions.createRow({
+            parentId: id,
+            newRow: res.data?.current,
+          })
+        );
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleDeleteRow = () => {
     deleteRow(id);
+    dispatch(rowsViewSlice.actions.deleteRow(id));
   };
 
   return (
     <>
-      <div className={styles.container} onDoubleClick={handleSetIsEdit}>
+      <div
+        id={String(row.id)}
+        className={styles.container}
+        onDoubleClick={handleSetIsEdit}
+      >
         <div
           onMouseEnter={() => setIsLevelHover(true)}
           onMouseLeave={() => setIsLevelHover(false)}
@@ -69,13 +93,12 @@ export default function RowItem({ row, level }: TRowItemProps) {
           {isLevelHover && <TrashIcon onClick={handleDeleteRow} />}
         </div>
         {/* Наименование работ */}
-        <div className={styles.input}>
+        <div className={styles.input} onDoubleClick={handleSetIsEdit}>
           <input
             name="rowName"
             value={rowState.rowName || ""}
             className={styles.input_name}
             disabled={!isEdit}
-            onDoubleClick={handleSetIsEdit}
             onChange={handleChangeValue}
             onKeyDown={handleInputKeyPress}
           />
@@ -129,11 +152,9 @@ export default function RowItem({ row, level }: TRowItemProps) {
           />
         </div>
       </div>
-      {row.child &&
-        row.child.length > 0 &&
-        row.child.map((childRow) => (
-          <RowsAll key={childRow.id} rows={row.child} level={level + 1} />
-        ))}
+      {row.child && row.child.length > 0 && (
+        <RowsAll rows={row.child} level={level + 1} />
+      )}
     </>
   );
 }
