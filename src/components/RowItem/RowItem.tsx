@@ -24,14 +24,14 @@ export default function RowItem({ row, level }: TRowItemProps) {
 
   const [updateRow] = smrApi.useUpdateRowMutation();
   const [createRow] = smrApi.useCreateRowInEntityMutation();
-  const [deleteRow] = smrApi.useDeleteProductMutation()
+  const [deleteRow] = smrApi.useDeleteProductMutation();
 
   const handleSetIsEdit = () => {
     setIsEdit(true);
   };
 
   const handleChangeValue = (evt: React.FormEvent<HTMLInputElement>) => {
-    const { name, value } = evt.target as HTMLInputElement
+    const { name, value } = evt.target as HTMLInputElement;
     setRowState((prev) => ({
       ...prev,
       [name]: name === "rowName" ? value : Number(value),
@@ -46,13 +46,13 @@ export default function RowItem({ row, level }: TRowItemProps) {
   };
 
   const handleCreateRow = () => {
-    newRow.parentId = id
+    newRow.parentId = id;
     createRow(newRow);
-  }
+  };
 
   const handleDeleteRow = () => {
     deleteRow(id);
-  }
+  };
 
   return (
     <>
@@ -65,14 +65,8 @@ export default function RowItem({ row, level }: TRowItemProps) {
           })}
           style={{ marginLeft: `${level * 10}px` }}
         >
-          {/* <div className={styles["level-icon-wrapper"]}> */}
-            <DocumentIcon onClick={handleCreateRow}/>
-          {/* </div> */}
-          {isLevelHover && (
-            // <div className={styles["level-icon-wrapper"]}>
-              <TrashIcon onClick={handleDeleteRow} />
-            // </div>
-          )}
+          <DocumentIcon onClick={handleCreateRow} />
+          {isLevelHover && <TrashIcon onClick={handleDeleteRow} />}
         </div>
         {/* Наименование работ */}
         <div className={styles.input}>
@@ -135,9 +129,11 @@ export default function RowItem({ row, level }: TRowItemProps) {
           />
         </div>
       </div>
-      {row?.child?.map((childRow) => (
-        <RowsAll key={childRow.id} rows={row.child} level={level + 1} />
-      ))}
+      {row.child &&
+        row.child.length > 0 &&
+        row.child.map((childRow) => (
+          <RowsAll key={childRow.id} rows={row.child} level={level + 1} />
+        ))}
     </>
   );
 }
